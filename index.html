@@ -1,0 +1,159 @@
+<!doctype HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<meta content="telephone=no" name="format-detection" />
+<title>太平洋时尚网 专题模板</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="zhuanghuanbin_gz" />
+<style>
+*{padding:0px;margin:0px;}
+
+/*mask*/
+.m-mask-wrap{width:100px;height:150px;position:relative;background:rgba(000,000,000,0.9) url(http://www1.pclady.com.cn/global/2015/h5/admin/zt/img/loadding.gif) no-repeat center center;}
+.m-cover-bg{background-image:url(bg.jpg);-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;width:100%;height:100%;}
+.m-mask-wrap canvas{width:100%;height:100%;position:absolute;top:0px;left:0px;}
+
+
+
+
+
+
+
+.btn{margin:20px 0;background-color:#05a;color:#fff;text-align:center;height:30px;line-height:30px;-webkit-border-radius:3px;
+-moz-border-radius:3px;
+-ms-border-radius:3px;
+border-radius:3px;width:100px;text-align:center;font-size:12px;cursor: pointer;}
+
+
+
+canvas{width:300px;height:300px;border:1px solid #f00;background-color:#eee;}
+</style>
+</head>
+<body>
+<div class="m-mask-wrap">
+	<div class="m-cover-bg"></div>
+	<canvas id="Jaaa"></canvas>
+</div>
+<div class="btn" id="Jbtn">html2canvas</div>
+<div class="btn" id="Jbtn1">canvas2image</div>
+<div id="Jpic" class="pic"></div>
+
+<canvas id="Jbbb"></canvas>
+
+
+
+<a href="">kjhkjk</a>
+<script src="mask.js" charset="utf-8"></script>
+<script src="html2canvas.min.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+function $$(id) {
+	return (typeof id == "object") ? id : document.getElementById(id);
+}
+
+var Jaaa = $$("Jaaa");
+var JaaaCtx = Jaaa.getContext('2d');
+Jaaa.width = Jaaa.clientWidth;
+Jaaa.height = Jaaa.clientHeight;
+
+var Jbtn = $$("Jbtn");
+var Jbtn1 = $$("Jbtn1");
+
+// canvas转换成图片
+Jbtn1.addEventListener("click",function(){
+	var image = new Image();
+	image.src = Jaaa.toDataURL("image/png");
+	document.body.appendChild(image);
+},false);
+
+
+
+
+
+var Jbbb = $$("Jbbb");
+var JbbbCtx = Jbbb.getContext("2d");
+Jbtn.addEventListener("click", function() {
+	// html2canvas(document.querySelector("#content"), {
+	//     canvas: Jcanvas
+	// }).then(function(canvas) {
+	//     // console.log('Drew on the existing canvas');
+	// });
+
+
+	html2canvas(Jaaa, {
+		onrendered: function(canvas) {
+			document.body.appendChild(canvas);
+		},
+		// canvas: Jbbb,
+		width: 300,
+		height: 300,
+		proxy:"baidustatic.com",
+		background:"#f60"
+	});
+}, false);
+
+
+new mask({
+	target: document.getElementById("Jaaa"), //
+	fillStyle: "image", //color image data
+	fillContent: "http://192.168.50.53/work/MI/20150722mask/mask.jpg",
+	// fillContent: "http://ubmcmm.baidustatic.com/media/v1/0f00070_9B98XRlIBWyh40.gif",
+	percent: "50", //
+	radius: "40",
+	touchstart: function(e) {
+		console.log("手指按下");
+		console.log(e);
+	},
+	touchmove: function(e) {
+		console.log("手指移动");
+		console.log(e);
+	},
+	touchend: function(e) {
+		console.log("手指离开");
+		console.log(e);
+	},
+	complete: function() {
+		console.log("刮完了");
+	},
+	inited: function() {
+		console.log("mask初始化完成");
+	}
+});
+
+
+
+
+
+// function loadJs(url, fn, callbackName) {
+// 	if (url.indexOf("?") != -1) {
+// 		var url = url + '&callback=' + callbackName;
+// 	} else {
+// 		var url = url + '?callback=' + callbackName;
+// 	}
+// 	var head = document.getElementsByTagName("head")[0];
+// 	var script = document.createElement("script");
+// 	script.setAttribute("type", "text/javascript");
+// 	script.setAttribute("src", url);
+// 	head.appendChild(script);
+// 	script.onload = script.onreadystatechange = function() {
+// 		var f = script.readyState;
+// 		if (f && f != "loaded" && f != "complete") return;
+// 		script.onload = script.onreadystatechange = null;
+// 		// head.removeChild(script);
+// 		// delete window[callbackName];
+// 	};
+// }
+
+
+// loadJs("http://bip.pcauto.com.cn/intf/message.jsp?act=getNumToJson&siteId=2&accountId=24868561", function(data) {
+// }, "console.log(document.cookie);a=");
+
+</script>
+
+</body>
+</html>
