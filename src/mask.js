@@ -68,7 +68,6 @@
 
 			function preImage(url, callback) {
 				var img = new Image();
-				img.crossOrigin = '';
 				img.src = url;
 				if (img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数
 					callback.call(img);
