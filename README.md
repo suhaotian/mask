@@ -27,7 +27,7 @@ complete|刮完时【刮到指定百分比之后】执行函数|function(){}
 inited|函数初始化之后执行函数|function(){}
 
 ## 常见问题
-**注意fillContent图片跨域**
+### 注意fillContent图片跨域
 因为canvas中的getImageData方法不支持跨域，所以当参数fillStyle=image时，fillContent填的图片地址必须与主文件同域，否则程序会把自动涂抹功能改为刮了【percent/10】次之后自动抹去。
 
 如果图片不得不跨域，则考虑以下两种解决方案
