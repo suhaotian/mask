@@ -1,0 +1,61 @@
+<!doctype HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta content="telephone=no" name="format-detection" />
+<title>刮刮卡</title>
+<style>
+.mask{width:320px;height:480px;position:relative;float:left;}
+.mask img{display:block;width:100%;height:100%;}
+.mask canvas{width:100%;height:100%;position:absolute;top:0px;left:0px;}
+</style>
+</head>
+<body>
+
+<div class="mask">
+	<img src="./img/bg.jpg" alt="" />
+	<canvas id="JcanvasA"></canvas>
+</div>
+
+<div class="mask">
+	<img src="./img/bg.jpg" alt="" />
+	<canvas id="JcanvasB"></canvas>
+</div>
+
+
+<script src="./src/mask.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+new mask({
+	target: document.getElementById("JcanvasA")
+});
+
+new mask({
+	target: document.getElementById("JcanvasB"),
+	fillStyle: "image",
+	fillContent: "./img/mask.jpg",
+	percent: "50",
+	radius: "30",
+	touchstart: function(e) {
+		console.log("手指按下");
+		console.log(e);
+	},
+	touchmove: function(e) {
+		console.log("手指移动");
+		console.log(e);
+	},
+	touchend: function(e) {
+		console.log("手指离开");
+		console.log(e);
+	},
+	complete: function() {
+		console.log("刮完了");
+	},
+	inited: function() {
+		console.log("mask初始化完成");
+	}
+});
+</script>
+
+</body>
+</html>
