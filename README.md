@@ -1,7 +1,7 @@
 # mask.js
 ![Travis branch](https://img.shields.io/travis/joyent/node/v0.6.svg) ![Gemnasium](https://img.shields.io/gemnasium/mathiasbynens/he.svg?style=flat) ![apm](https://img.shields.io/apm/l/vim-mode.svg?style=flat)
 
-mask.js是一个基于canvas提供刮刮卡功能的小插件，支持图片和颜色两种填充方式，同时提供自动消抹，自定义涂抹笔触等功能。
+mask.js是一个基于canvas的移动端刮刮卡插件，支持图片和颜色两种填充方式，同时提供自动消抹，自定义涂抹笔触等功能。
 
 ## 快速使用
 ```javascript
