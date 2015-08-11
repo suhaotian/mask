@@ -1,0 +1,127 @@
+<html><head><style id="custom-theme">body{word-break:break-all;}
+#out{margin:0px auto;overflow:auto;padding:10px;padding-left:20px;color:#444;font-family:Georgia,Palatino,'Palatino Linotype',Times,'Times New Roman',serif;font-size:16px;line-height:1.5em}
+a{color:#0645ad;text-decoration:none;}
+a:visited{color:#0b0080;}
+a:hover{color:#06e;}
+a:active{color:#faa700;}
+a:focus{outline:thin dotted;}
+a:hover,a:active{outline:0;}
+p{margin:1em 0;}
+img{max-width:100%;}
+h1,h2,h3,h4,h5,h6{font-weight:normal;color:#111;line-height:1em;}
+h4,h5,h6{font-weight:bold;}
+h1{font-size:2.5em;}
+h2{font-size:2em;border-bottom:1px solid silver;padding-bottom:5px;}
+h3{font-size:1.5em;}
+h4{font-size:1.2em;}
+h5{font-size:1em;}
+h6{font-size:0.9em;}
+blockquote{color:#666666;margin:0;padding-left:3em;border-left:0.5em #EEE solid;}
+hr{display:block;height:2px;border:0;border-top:1px solid #aaa;border-bottom:1px solid #eee;margin:1em 0;padding:0;}
+pre,code{color:#000;font-family:monospace;font-size:0.88em;border-radius:3px;background-color:#F8F8F8;border:1px solid #CCC;}
+pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word;padding:5px;}
+pre code{border:0px!important;background:transparent!important;line-height:1.3em;}
+code{padding:0 3px 0 3px;}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}
+sup{top:-0.5em;}
+sub{bottom:-0.25em;}
+ul,ol{margin:1em 0;padding:0 0 0 2em;}
+li p:last-child{margin:0}
+dd{margin:0 0 0 2em;}
+img{border:0;-ms-interpolation-mode:bicubic;vertical-align:middle;}
+table{border-collapse:collapse;border-spacing:0;}
+td,th{vertical-align:top;padding:4px 10px;border:1px solid #bbb;}
+tr:nth-child(even) td,tr:nth-child(even) th{background:#eee;}
+
+/*
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+*/
+pre code{display:block;padding:0.5em;background:#F0F0F0;}
+pre code,pre .subst,pre .tag .title,pre .lisp .title,pre .clojure .built_in,pre .nginx .title{color:black;}
+pre .string,pre .title,pre .constant,pre .parent,pre .tag .value,pre .rules .value,pre .rules .value .number,pre .preprocessor,pre .ruby .symbol,pre .ruby .symbol .string,pre .aggregate,pre .template_tag,pre .django .variable,pre .smalltalk .class,pre .addition,pre .flow,pre .stream,pre .bash .variable,pre .apache .tag,pre .apache .cbracket,pre .tex .command,pre .tex .special,pre .erlang_repl .function_or_atom,pre .markdown .header{color:#800;}
+pre .comment,pre .annotation,pre .template_comment,pre .diff .header,pre .chunk,pre .markdown .blockquote{color:#888;}
+pre .number,pre .date,pre .regexp,pre .literal,pre .smalltalk .symbol,pre .smalltalk .char,pre .go .constant,pre .change,pre .markdown .bullet,pre .markdown .link_url{color:#080;}
+pre .label,pre .javadoc,pre .ruby .string,pre .decorator,pre .filter .argument,pre .localvars,pre .array,pre .attr_selector,pre .important,pre .pseudo,pre .pi,pre .doctype,pre .deletion,pre .envvar,pre .shebang,pre .apache .sqbracket,pre .nginx .built_in,pre .tex .formula,pre .erlang_repl .reserved,pre .prompt,pre .markdown .link_label,pre .vhdl .attribute,pre .clojure .attribute,pre .coffeescript .property{color:#88F}
+pre .keyword,pre .id,pre .phpdoc,pre .title,pre .built_in,pre .aggregate,pre .css .tag,pre .javadoctag,pre .phpdoc,pre .yardoctag,pre .smalltalk .class,pre .winutils,pre .bash .variable,pre .apache .tag,pre .go .typename,pre .tex .command,pre .markdown .strong,pre .request,pre .status{font-weight:bold;}
+pre .markdown .emphasis,pre .comment{font-style:italic;}
+pre .nginx .built_in{font-weight:normal;}
+pre .coffeescript .javascript,pre .javascript .xml,pre .tex .formula,pre .xml .javascript,pre .xml .vbscript,pre .xml .css,pre .xml .cdata{opacity:0.5;}</style></head><body youdao="bind"><h1 id="mask-js">mask.js</h1>
+<p><img src="https://img.shields.io/travis/joyent/node/v0.6.svg" alt="Travis branch"> <img src="https://img.shields.io/gemnasium/mathiasbynens/he.svg?style=flat" alt="Gemnasium"> <img src="https://img.shields.io/apm/l/vim-mode.svg?style=flat" alt="apm"></p>
+<p>mask.js是一个基于canvas的移动端刮刮卡插件，支持图片和颜色两种填充方式，同时提供自动消抹，自定义涂抹笔触等功能。</p>
+<h2 id="-">快速使用</h2>
+<pre><code class="lang-javascript"><span class="tag">new</span> <span class="tag">mask</span>(<span class="rules">{
+    <span class="rule"><span class="attribute">target</span>:<span class="value"> document.<span class="function">querySelector(<span class="string">"canvas"</span>)</span>
+}</span></span></span>);
+</code></pre>
+<p><strong>其他拓展功能请参考<a href="index.html">【DEMO】</a></strong></p>
+<h2 id="api">API</h2>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>canvas目标元素 【必须】 没有的话返回false</td>
+<td>false</td>
+</tr>
+<tr>
+<td>fillStyle</td>
+<td>填充的方式 支持两种 color &amp; image</td>
+<td>color</td>
+</tr>
+<tr>
+<td>fillContent</td>
+<td>根据fillStyle填充内容<br>fillStyle=color则填颜色值<br>fillStyle=image则填图片地址或base64代码</td>
+<td>#cccccc</td>
+</tr>
+<tr>
+<td>percent</td>
+<td>涂抹了xx%后自动抹去 【接受0-100之间的数值】</td>
+<td>100</td>
+</tr>
+<tr>
+<td>radius</td>
+<td>涂抹笔触的半径</td>
+<td>15</td>
+</tr>
+<tr>
+<td>touchstart</td>
+<td>手指按下的时候执行函数</td>
+<td>function(){}</td>
+</tr>
+<tr>
+<td>touchmove</td>
+<td>手指移动的时候执行函数</td>
+<td>function(){}</td>
+</tr>
+<tr>
+<td>touchend</td>
+<td>手指离开的时候执行函数</td>
+<td>function(){}</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>刮完时【刮到指定百分比之后】执行函数</td>
+<td>function(){}</td>
+</tr>
+<tr>
+<td>inited</td>
+<td>函数初始化之后执行函数</td>
+<td>function(){}</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-">常见问题</h2>
+<h3 id="-fillcontent-">注意fillContent图片跨域</h3>
+<p>因为canvas中的getImageData方法不支持跨域，所以当参数fillStyle=image时，fillContent填的图片地址必须与主文件同域，否则程序会把自动涂抹功能改为刮了【percent/10】次之后自动抹去。</p>
+<p>如果图片不得不跨域，则考虑以下两种解决方案</p>
+<ul>
+<li>通过一个自定义接口，把图片转换成base64编码后再引用</li>
+<li>从网络层面设置图片服务器的响应头 Access-Control-Allow-Origin:*</li>
+</ul>
+</body></html>
