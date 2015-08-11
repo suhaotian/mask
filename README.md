@@ -9,8 +9,7 @@ new mask({
 	target: document.querySelector("canvas")
 });
 ```
-**【其他拓展功能请参考DEMO】**
-
+**其他拓展功能请参考[【DEMO】](index.html)**
 
 ## API
 参数|说明|默认值
