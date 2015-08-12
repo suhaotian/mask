@@ -6,9 +6,12 @@
 <meta content="telephone=no" name="format-detection" />
 <title>刮刮卡</title>
 <style>
-.mask{width:320px;height:480px;position:relative;float:left;}
+.mask{width:320px;height:480px;position:relative;margin:0px auto;}
 .mask img{display:block;width:100%;height:100%;}
 .mask canvas{width:100%;height:100%;position:absolute;top:0px;left:0px;}
+
+.btn{width:320px;height:25px;line-height:25px;background-color:#05a;border-radius:3px;color:#fff;text-align:center;margin:10px auto;font-size:12px;cursor:pointer;}
+.btn:hover{background-color:red;}
 </style>
 </head>
 <body>
@@ -18,44 +21,53 @@
 	<canvas id="JcanvasA"></canvas>
 </div>
 
-<div class="mask">
-	<img src="./img/bg.jpg" alt="" />
-	<canvas id="JcanvasB"></canvas>
-</div>
+<div class="btn" id="JbtnA">点击封锁</div>
+<div class="btn" id="JbtnB">点击解锁</div>
+<div class="btn" id="JbtnC">点击改变涂抹笔触</div>
+<div class="btn" id="JbtnD">点击自动刮完</div>
+<div class="btn" id="JbtnE">点击重新初始化</div>
+<div class="btn" id="JbtnZ">点击重新初始化并改变覆盖内容</div>
 
 
-<script src="./src/mask.min.js" charset="utf-8"></script>
+<script src="./src/mask.js" charset="utf-8"></script>
 <script type="text/javascript">
-new mask({
-	target: document.getElementById("JcanvasA")
-});
+function $$(id) {
+	return (typeof id == "object") ? id : document.getElementById(id);
+}
 
-new mask({
-	target: document.getElementById("JcanvasB"),
-	fillStyle: "image",
-	fillContent: "./img/mask.jpg",
-	percent: "50",
-	radius: "30",
-	touchstart: function(e) {
-		console.log("手指按下");
-		console.log(e);
-	},
-	touchmove: function(e) {
-		console.log("手指移动");
-		console.log(e);
-	},
-	touchend: function(e) {
-		console.log("手指离开");
-		console.log(e);
-	},
-	complete: function() {
-		console.log("刮完了");
-	},
-	inited: function() {
-		console.log("mask初始化完成");
-	}
-});
+
+var maskA = new mask($$("JcanvasA"));
+
+$$("JbtnA").addEventListener("click",function(){
+	maskA.disable();
+},false);
+
+$$("JbtnB").addEventListener("click",function(){
+	maskA.enable();
+},false);
+
+$$("JbtnC").addEventListener("click",function(){
+	maskA.changeConfig({
+		radius: 50
+	});
+},false);
+
+$$("JbtnD").addEventListener("click",function(){
+	maskA.clear();
+},false);
+
+$$("JbtnE").addEventListener("click",function(){
+	maskA.init();
+},false);
+
+$$("JbtnZ").addEventListener("click",function(){
+	maskA.changeConfig({
+		fillStyle: "image",
+		fillContent: "./img/mask.jpg"
+	});
+	maskA.init();
+},false);
+
 </script>
-
 </body>
 </html>

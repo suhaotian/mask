@@ -21,7 +21,7 @@ li p:last-child{margin:0}
 dd{margin:0 0 0 2em;}
 img{border:0;-ms-interpolation-mode:bicubic;vertical-align:middle;}
 table{border-collapse:collapse;border-spacing:0;margin-bottom:1em;}
-td,th{vertical-align:top;padding:4px 10px;border:1px solid #bbb;}
+td,th{padding:4px 10px;border:1px solid #bbb;}
 tr:nth-child(even) td,tr:nth-child(even) th{background:#eee;}
 
 pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word;border:1px solid #CCC!important;background-color:#F8F8F8;color:#000;}
@@ -52,12 +52,41 @@ pre .scss .tag,pre .scss .attribute{color:#339;}</style></head><body youdao="bin
 <p>mask.js是一个基于canvas的移动端刮刮卡插件，支持图片和颜色两种填充方式，同时提供自动消抹，自定义涂抹笔触等功能。</p>
 <h2 id="-">快速使用</h2>
 <p>使用之前必须先引用这个脚本 然后</p>
-<pre><code class="lang-javascript"><span class="tag">new</span> <span class="tag">mask</span>(<span class="rules">{
-    <span class="rule"><span class="attribute">target</span>:<span class="value"> document.<span class="function">querySelector(<span class="string">"canvas"</span>)</span>
-}</span></span></span>);
+<pre><code class="lang-javascript"><span class="title">new</span> mask(target,config);
+</code></pre>
+<ul>
+<li>target：要初始化成刮刮卡的目标canvas元素，不可为空 <br></li>
+<li>config：配置对象【config可以为空 为空的话使用默认值】</li>
+</ul>
+<pre><code class="lang-javascript"><span class="keyword">new</span> mask(document.querySelector(<span class="string">"canvas"</span>),{
+    fillStyle: <span class="string">"image"</span>,
+    fillContent: <span class="string">"./img/mask.jpg"</span>,
+    percent: <span class="string">"50"</span>,
+    radius: <span class="string">"30"</span>,
+    disable: <span class="literal">false</span>,
+    touchstart: <span class="keyword">function</span>(e) {
+        console.log(<span class="string">"手指按下"</span>);
+        console.log(e);
+    },
+    touchmove: <span class="keyword">function</span>(e) {
+        console.log(<span class="string">"手指移动"</span>);
+        console.log(e);
+    },
+    touchend: <span class="keyword">function</span>(e) {
+        console.log(<span class="string">"手指离开"</span>);
+        console.log(e);
+    },
+    complete: <span class="keyword">function</span>() {
+        console.log(<span class="string">"刮完了"</span>);
+    },
+    inited: <span class="keyword">function</span>() {
+        console.log(<span class="string">"mask初始化完成"</span>);
+    }
+});
 </code></pre>
 <p><strong>其他拓展功能请参考<a href="index.html">【DEMO】</a></strong></p>
 <h2 id="api">API</h2>
+<h3 id="-config">自定义配置config</h3>
 <table>
 <thead>
 <tr>
@@ -84,13 +113,18 @@ pre .scss .tag,pre .scss .attribute{color:#339;}</style></head><body youdao="bin
 </tr>
 <tr>
 <td>percent</td>
-<td>涂抹了xx%后自动抹去 【接受0-100之间的数值】</td>
+<td>涂抹了xx%后自动抹去 【接受0%-100%之间的数值 百分号%可省略】</td>
 <td>100</td>
 </tr>
 <tr>
 <td>radius</td>
-<td>涂抹笔触的半径</td>
+<td>涂抹笔触的半径【单位是px px可省略】</td>
 <td>15</td>
+</tr>
+<tr>
+<td>disable</td>
+<td>是否封锁 默认不封锁</td>
+<td>false</td>
 </tr>
 <tr>
 <td>touchstart</td>
@@ -119,6 +153,14 @@ pre .scss .tag,pre .scss .attribute{color:#339;}</style></head><body youdao="bin
 </tr>
 </tbody>
 </table>
+<h3 id="-">函数方法</h3>
+<ul>
+<li>clear() 自动刮完</li>
+<li>disable() 封锁刮刮卡</li>
+<li>enable() 解锁刮刮卡</li>
+<li>changeConfig(config) 更改配置项【传入自定义config对象 实时生效】【亦可实现disable()和enable()功能】</li>
+<li>init() 重新初始化【可配合changeConfig(config)使用】</li>
+</ul>
 <h2 id="-">常见问题</h2>
 <h3 id="-fillcontent-">注意fillContent图片跨域</h3>
 <p>因为canvas中的getImageData方法不支持跨域，所以当参数fillStyle=image时，fillContent填的图片地址必须与主文件同域，否则程序会把自动涂抹功能改为刮了【percent/10】次之后自动抹去。</p>
