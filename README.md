@@ -3,10 +3,14 @@
 
 mask.js是一个基于canvas的移动端刮刮卡插件，支持图片和颜色两种填充方式，同时提供自动消抹，自定义涂抹笔触等功能。
 
+
 ## 快速使用
 使用之前必须先引用这个脚本 然后
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2bb78f3891bc6f5ad80faad8f034d3a607fcdb9c
 ```javascript
 new mask(target,config);
 ```
