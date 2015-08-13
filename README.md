@@ -48,7 +48,6 @@ new mask(document.querySelector("canvas"),{
 ### 自定义配置config
 参数|说明|默认值
 ---|---|---
-target|canvas目标元素 【必须】 没有的话返回false|false
 fillStyle|填充的方式 支持两种 color & image|color
 fillContent|根据fillStyle填充内容<br>fillStyle=color则填颜色值<br>fillStyle=image则填图片地址或base64代码|\#cccccc
 percent|涂抹了xx%后自动抹去 【接受0%-100%之间的数值 百分号%可省略】|100
