@@ -1,3 +1,4 @@
+"use strict";
 ;function mask(target,config) {
 	if (!target) return;
 	// 默认配置
@@ -24,6 +25,8 @@
 
 mask.prototype = {
 	changeConfig : function (config) {
+		v = 1;
+		console.log(v);
 		var _this = this;
 		for (var x in config) {
 			_this.config[x] = config[x];
