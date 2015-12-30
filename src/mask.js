@@ -25,7 +25,7 @@
 
 mask.prototype = {
 	changeConfig : function (config) {
-		v = 1;
+		var v = 1;
 		console.log(v);
 		var _this = this;
 		for (var x in config) {
